@@ -1,0 +1,20 @@
+{
+  "name": "sisc",
+  "version": "1.0.0",
+  "description": "Servidor para el contron de casilla para el día de las elecciones",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "start index.js"
+  },
+  "author": "Er Leví Medina Rodríguez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}

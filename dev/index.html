@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Emulator</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="socket.js"></script>
+	<script type="text/javascript" src="prism.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="prism.css">
+  <style type="text/css">
+  	header, footer {
+      padding-left: 300px;
+    }
+  	main {
+      padding-left: 325px;
+      padding-right: 25px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }
+  </style>
+</head>
+<body class="grey lighten-3">
+	<header>
+		<nav>
+	    <div class="nav-wrapper green darken-2">
+	      <a href="#" class="brand-logo">Emulator</a>
+	      <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
+	        <li><a href="sass.html">Sass</a></li>
+	        <li><a href="badges.html">Components</a></li>
+	        <li><a href="collapsible.html">JavaScript</a></li>
+	      </ul> -->
+	    </div>
+	  </nav>
+  </header>
+  <ul id="slide-out" class="side-nav fixed">
+    <li><div class="user-view">
+      <div class="background">
+        <img src="images/office.jpg">
+      </div>
+      <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
+      <a href="#!name"><span class="white-text name">John Doe</span></a>
+      <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+    </div></li>
+    <li><a href="#!">boxes list</a></li>
+    <li><div id="chips">
+  	</div></li>
+  </ul>
+  <main class="">  	
+		<h4>Get a connection (Socket)</h4>
+		Cuando haya una conección al servidor mediante sockets, el servidor pedira al dispositivo que diga de que casilla es. Para ellos, medianto un <i>on</i> el dispositivo tendrá que realizar un emmit con la casilla que le corresponde a ese dispositivo, por ejemplo (El ejemplo en JS):
+		<pre><code class="language-js">socket.on('whoAreYou', function(){
+	socket.emit('IAm', {casilla:NUMERO_CASILLA})
+})</code></pre>
+		<hr>
+		<h4>Sent evidence (Socket)</h4>
+		El envia de evidencia será divido en 2 secciones, una para guardar la imagen el servidor (La cual regresa el nombre con el que se guardó en el servidor) y la otra para guardad en base de datos y notificar a la plataforma. <br>
+		La evidencia mediante el socket debe tener la siguiente estructura:
+		<pre><code class="language-js">evidencia = {
+	longitude:-100.000000,
+	latitude:20.000000,
+	fotografia:"NOMBRE_FOTOGRAFÍA",
+	descripcion:"DESCRIPCION_QUE_EL_USUARIO_PUSO_EN_LA_APP_AL_CARGAR_LA_EVIDENCIA",
+	usuario_id:1,
+	tipo_evidencia_id:1
+}</code></pre>
+		<small><i>NOTA: Los valores de de tipo_evidencia_id son; 2 - acta inicial, 3 - reporte, 4 - comida, 5 - acta final</i></small><br>
+		<small><i>NOTA: para la comida no es necesario subir una fotografía y la descripcion puede ir pre-escrita</i></small><br>
+		El tag para el socket es: 
+		<pre><code class="language-js">socket.emit('upEvidence', evidendia)</code></pre>
+		La respuesta del servidor será: 
+		<pre><code class="language-js">socket.on('responseEvidence', function(data){
+	//Tu código va aquí
+})</code></pre>
+		Donde data es un JSon con la estructura:
+		<pre><code class="language-json">{
+	status:true/false,
+	message:"MENSAJE DE RESPUESTA"
+}</code></pre>
+		<hr>
+		<h4>Sent image evidence (REST)</h4>
+		<hr>
+		<h4>Get LogIn (REST)</h4>
+		<hr>
+	</main>
+</body>
+</html>
